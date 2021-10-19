@@ -67,9 +67,11 @@ class NovaImageWithThumbs extends Image
             $method = $config['method'];
             $name = $config['name'];
 
-            $imageThumb = Cropper::make($request->{$requestAttribute})->$method($config['w'], $config['h'], function ($c) {
-                $c->upsize();
-            })->encode($originalExtension, 90);
+//            $imageThumb = Cropper::make($request->{$requestAttribute})->$method($config['w'], $config['h'], function ($c) {
+//                $c->upsize();
+//            })->encode($originalExtension, 90);
+
+            $imageThumb = Cropper::make($request->{$requestAttribute})->$method($config['w'], $config['h'])->encode($originalExtension);
 
             Storage::disk($this->getStorageDisk())->put($fileName, (string) $imageThumb);
 
